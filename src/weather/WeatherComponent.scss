@@ -1,0 +1,153 @@
+@import '../styles/variables.scss';
+
+
+.wrapper {
+  width: 460px;
+  margin: 20px 0 0 0;
+  position: relative;
+}
+
+
+
+
+.toggle-btn{
+  position: absolute;
+  top: -50px;
+  right: 0;
+}
+
+.panel__error{
+  color: $transp-black;
+  font-size: $font-xs;
+}
+
+.wrapper {
+  background-color: $transp-white;
+  color: $transp-black;
+
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.location {
+  margin: 0 0 -10px 0;
+  font-size: $font-xxl;
+  font-weight: 100;
+}
+
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin: 0 0 20px 0;
+}
+
+.main__item {
+  font-weight: 300;
+}
+
+.main__item--date-time {
+
+}
+
+.main__item__time {
+  font-size: 35px;
+  text-transform: lowercase;
+}
+
+.main__item__date {
+  font-size: $font-sm;
+  font-weight: 300;
+}
+
+
+.main__item--info {
+  text-align: center;
+  font-size: $font-sm;
+
+  .wi {
+    font-size: 60px;
+    margin: 0 0 10px 0;
+  }
+}
+
+.main__item--temps {
+  text-align: center;
+}
+
+.main__item__temp {
+  font-weight: 100;
+  font-size: 50px;
+  margin: 0 0 -5px 0;
+}
+
+.main__item__min-max {
+  font-size: $font-sm;
+}
+
+
+
+
+
+.info {
+  display: flex;
+  margin: 0 0 10px 0;
+}
+
+.info__item {
+  margin: 0 20px 0 0;
+  font-weight: 300;
+
+  .wi {
+    font-size: $font-xl;
+  }
+
+  .wi-wind-direction {
+    font-size: $font-xxl;
+  }
+
+}
+
+
+.buttons {
+  border-top: 1px solid $transp-grey;
+  display: flex;
+}
+
+.button {
+  &:not(:first-child) {
+    border-left: 1px solid $transp-grey;
+  }
+
+  width: 88px;
+  padding: 0 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+.button--selected {
+  color: $transp-grey;
+}
+
+.button__day {
+  margin: 5px 0 0 0;
+}
+
+.button__icon {
+  font-size: $font-xl;
+}
+
+.button__temp {
+  font-size: $font-lg;
+  margin: 5px 0;
+}
+
+.button__min-max {
+  font-size: $font-xs;
+}
