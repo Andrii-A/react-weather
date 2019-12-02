@@ -4,12 +4,9 @@ import './WeatherComponent.scss';
 import {transformPressure, transformSpeed, transformTemp, parseDate, parseTime, parseDay} from '../common/helpers';
 
 const WeatherComponent = ({fullForecast, fiveDaysList, selectedDay, selectDay}) => {
-
   const [currentScale, setCurrentScale] = useState('metric');
 
-  const toggleScale = () => {
-    setCurrentScale(currentScale === 'imperial' ? 'metric' : 'imperial');
-  };
+  const toggleScale = () => setCurrentScale(currentScale === 'imperial' ? 'metric' : 'imperial');
 
   return (
     <div className="wrapper">
