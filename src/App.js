@@ -6,15 +6,11 @@ import {BASE_URL} from "./common/constants";
 import axios from "axios";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchLocation: 'Burlington, CA',
-      error: false,
-      loading: false,
-    };
-  }
-
+  state = {
+    searchLocation: 'Burlington, CA',
+    error: false,
+    loading: false,
+  };
 
   componentDidMount() {
     this.getForecast();
@@ -97,7 +93,8 @@ class App extends React.Component {
 
         {this.state.loading ?
           <>Loading...</> :
-          <WeatherComponent {...this.state} selectDay={(i, e) => { this.selectDay(i, e)}}/>}
+          this.state.fullForecast && <WeatherComponent {...this.state} selectDay={(i, e) => { this.selectDay(i, e)}}/>
+        }
       </div>
     )
   };
