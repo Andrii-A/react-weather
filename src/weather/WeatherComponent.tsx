@@ -1,9 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import './WeatherComponent.scss';
 
-import {transformPressure, transformSpeed, transformTemp, parseDate, parseTime, parseDay} from '../common/helpers';
+import { cityType, weatherDayType } from "../App";
 
-const WeatherComponent = ({fullForecast, fiveDaysList, selectedDay, selectDay}) => {
+import { transformPressure, transformSpeed, transformTemp, parseDate, parseTime, parseDay } from '../common/helpers';
+
+const WeatherComponent = (props: any) => {
+  const city: cityType = props.city;
+  const selectedDay: weatherDayType = props.selectedDay;
+  const fiveDaysList: weatherDayType[] = props.fiveDaysList;
+  const selectDay = props.selectDay;
+
   const [currentScale, setCurrentScale] = useState('metric');
 
   const toggleScale = () => setCurrentScale(currentScale === 'imperial' ? 'metric' : 'imperial');
@@ -12,7 +21,7 @@ const WeatherComponent = ({fullForecast, fiveDaysList, selectedDay, selectDay}) 
     <div className="wrapper">
       <button className="toggle-btn" onClick={() => toggleScale()}>{currentScale}</button>
 
-      <div className="location">{fullForecast.city.name}, {fullForecast.city.country}</div>
+      <div className="location">{city.name}, {city.country}</div>
 
       <div className="main">
         <div className="main__item main__item--date-time">
@@ -26,8 +35,8 @@ const WeatherComponent = ({fullForecast, fiveDaysList, selectedDay, selectDay}) 
         </div>
 
         <div className="main__item main__item--info">
-          <i className={'wi wi-owm-' + selectedDay.weather[0].id}/>
-          <div>{selectedDay.weather[0].description}</div>
+          <i className={'wi wi-owm-' + selectedDay.weather[ 0 ].id}/>
+          <div>{selectedDay.weather[ 0 ].description}</div>
         </div>
 
         <div className="main__item main__item--temps">
@@ -49,17 +58,18 @@ const WeatherComponent = ({fullForecast, fiveDaysList, selectedDay, selectDay}) 
 
         <div className="info__item">
           <i className="wi wi-wind-direction"
-             style={{transform: 'rotate(' + selectedDay.wind.deg + 'deg)'}}/> {transformSpeed(selectedDay.wind.speed, currentScale)}
+             style={{ transform: 'rotate(' + selectedDay.wind.deg + 'deg)' }}/> {transformSpeed(selectedDay.wind.speed, currentScale)}
         </div>
       </div>
 
       <ul className="buttons">
-        {fiveDaysList.map((day, i) =>
+        {fiveDaysList.map((day: weatherDayType, i: number) =>
           <li key={i} className={"button " + (day.selected ? 'button--selected' : '')}
-              onClick={() => selectDay(i, {key: 'Enter'})} onKeyDown={(e) => selectDay(i, e)}
-              tabIndex="0" role="button" aria-pressed={day.selected}>
+              onClick={() => selectDay(i, { key: 'Enter' })}
+              onKeyDown={(e) => selectDay(i, e)}
+              tabIndex={0} role="button" aria-pressed={day.selected}>
             <div className="button__day">{parseDay(day.dt_txt)}</div>
-            <div className="button__icon"><i className={'wi wi-owm-' + day.weather[0].id}/></div>
+            <div className="button__icon"><i className={'wi wi-owm-' + day.weather[ 0 ].id}/></div>
             <div className="button__temp">{transformTemp(day.main.temp, currentScale)}</div>
             <div className="button__min-max">
               {transformTemp(day.main.temp_min, currentScale)} | {transformTemp(day.main.temp_max, currentScale)}
@@ -69,6 +79,14 @@ const WeatherComponent = ({fullForecast, fiveDaysList, selectedDay, selectDay}) 
       </ul>
     </div>
   );
+};
+
+
+WeatherComponent.propTypes = {
+  city: PropTypes.object.isRequired,
+  fiveDaysList: PropTypes.array.isRequired,
+  selectedDay: PropTypes.object.isRequired,
+  selectDay: PropTypes.func.isRequired
 };
 
 export default WeatherComponent;
